@@ -1,0 +1,10 @@
+.Row {
+    display: flex;
+    flex: 1;
+    transition: .5s;
+}
+
+.Row:hover{
+    transform: scale(0.95);
+    cursor: pointer;
+}
