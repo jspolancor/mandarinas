@@ -1,24 +1,28 @@
-import { useState } from 'react';
-import _ from 'lodash';
+import { useEffect, useState } from "react";
+import _ from "lodash";
 
-import './Square.css';
+import "./Square.css";
 
-const Square = ({ onToggle, active, index, duration }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const noteRgb = `rgb(${_.random(0, 255)}, ${_.random(0, 70)}, ${_.random(0, 70)})`;
+const Square = ({ active, duration }) => {
+  const [origin, setOrigin] = useState();
+  const noteRgb = `rgb(${_.random(100, 255)}, ${_.random(100, 210)}, ${_.random(
+    0,
+    30
+  )})`;
 
-  const toggleSquare = () => {
-    const updatedPlaying = !isPlaying;
-    setIsPlaying(updatedPlaying);
-    onToggle(index, updatedPlaying);
-  };
+  useEffect(() => {
+    setOrigin(_.sample(["top", "bottom", "left", "right", "center"]));
+  }, []);
 
   return (
-    <div className={active ? 'Square active' : 'Square'} onClick={toggleSquare} style={{
-      background: noteRgb,
-      transition: duration + 's'
-    }}>
-    </div>
+    <div
+      className={active ? "Square active" : "Square"}
+      style={{
+        background: noteRgb,
+        transition: duration + "s",
+        transformOrigin: origin,
+      }}
+    ></div>
   );
 };
 
